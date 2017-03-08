@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-3-6 12:41:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pro.dao.entity.Stream" table="STREAM">
+        <id name="stream_id" type="int">
+            <column name="STREAM_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="stream_name" type="java.lang.String">
+            <column name="STREAM_NAME" />
+        </property>
+        <property name="stream_port" type="int">
+            <column name="STREAM_PORT" />
+        </property>
+        <many-to-one name="user" class="pro.dao.entity.User" fetch="join">
+            <column name="user_id" />
+        </many-to-one>
+        <property name="stream_minute" type="float">
+            <column name="STREAM_MINUTE" />
+        </property>
+        <property name="count" type="int">
+            <column name="COUNT" />
+        </property>
+    </class>
+</hibernate-mapping>

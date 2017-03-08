@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<display-name></display-name>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>GetCarsJSON</servlet-name>
+		<servlet-class>pro.servlet.action.GetCarsJSON</servlet-class>
+	</servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>ChangeStream1_mimute</servlet-name>
+		<servlet-class>pro.servlet.action.ChangeStream1_mimute</servlet-class>
+	</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ChangeStream2_mimute</servlet-name>
+    <servlet-class>pro.servlet.action.ChangeStream2_mimute</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetResultJSON</servlet-name>
+    <servlet-class>pro.servlet.action.GetResultJSON</servlet-class>
+  </servlet>
+ 
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>pro.servlet.action.DownloadServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>WMReport</servlet-name>
+    <servlet-class>pro.servlet.action.WMReport</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DayReport</servlet-name>
+    <servlet-class>pro.servlet.action.DayReport</servlet-class>
+  </servlet>
+	<servlet>
+		<description>This is the description of my J2EE component</description>
+		<display-name>This is the display name of my J2EE component</display-name>
+		<servlet-name>Blacklist</servlet-name>
+		<servlet-class>pro.servlet.action.Blacklist</servlet-class>
+	</servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+	<servlet-mapping>
+		<servlet-name>GetCarsJSON</servlet-name>
+		<url-pattern>/servlet/GetCarsJSON</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangeStream1_mimute</servlet-name>
+		<url-pattern>/servlet/ChangeStream1_mimute</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ChangeStream2_mimute</servlet-name>
+    <url-pattern>/servlet/ChangeStream2_mimute</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetResultJSON</servlet-name>
+    <url-pattern>/servlet/GetResultJSON</url-pattern>
+  </servlet-mapping>
+  
+
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/servlet/DownloadServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>WMReport</servlet-name>
+    <url-pattern>/servlet/WMReport</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>Blacklist</servlet-name>
+    <url-pattern>/servlet/Blacklist</url-pattern>
+  </servlet-mapping>
+
+
+	
+
+	
+</web-app>
