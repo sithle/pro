@@ -83,10 +83,10 @@ public class CreateExcel {
 			// 第四步，创建单元格，并设置值
 			row.createCell((short) 0)
 					.setCellValue(car.getDatetime().toString());
-			row.createCell((short) 1).setCellValue((int) car.getLane());
-			row.createCell((short) 2).setCellValue((double) car.getVelocity());
-			row.createCell((short) 3).setCellValue((double) car.getWeight());
-			row.createCell((short) 4).setCellValue((int) car.getAxis());
+			row.createCell((short) 1).setCellValue(car.getLane());
+			row.createCell((short) 2).setCellValue( car.getVelocity());
+			row.createCell((short) 3).setCellValue( car.getWeight());
+			row.createCell((short) 4).setCellValue(car.getAxis());
 			row.createCell((short) 5).setCellValue(car.getCarnumber());
 			row.createCell((short) 6).setCellValue(car.getPhoto());
 			row.createCell((short) 7).setCellValue(car.getStream());
