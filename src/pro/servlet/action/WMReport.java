@@ -18,6 +18,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import pro.dao.entity.Car;
+import pro.dao.entity.Car2;
 import pro.hibernate.util.HibernateUtil;
 import pro.json.tools.JsonTools;
 import pro.utils.CreateExcel;
@@ -54,62 +55,60 @@ public class WMReport extends HttpServlet {
 
 			// HQL语句
 			String hql = "";
-			if (stream.equals("全部")) {
+			if (stream.equals("上游")) {
 				if (!start_time.equals("") && !end_time.equals("")) {
 					// 查询在start_time和end_time之间，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.datetime <= str_to_date('"
+							+ "' and c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
+							+ "' and c.weight >= " + weightStandard
 							+ " order by c.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
+							+ "' and c.weight >= " + weightStandard
 							+ " order by c.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime <= str_to_date('"
+					hql = "from Car c where c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
+							+ "' and c.weight >= " + weightStandard
 							+ " order by c.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
 					hql = "from Car c where c.weight >= " + weightStandard
 							+ " order by c.datetime asc";
 				}
-			} else {
+			} else if(stream.equals("下游")){
 				if (!start_time.equals("") && !end_time.equals("")) {
 					// 查询在start_time和end_time之间，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car2 c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.datetime <= str_to_date('"
+							+ "' and c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= " + weightStandard
+							+ " order by c.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car2 c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= " + weightStandard
+							+ " order by c.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime <= str_to_date('"
+					hql = "from Car2 c where c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + weightStandard
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= " + weightStandard
+							+ " order by c.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
-					hql = "from Car c where c.weight >= " + weightStandard
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+					hql = "from Car2 c where c.weight >= " + weightStandard
+							+ " order by c.datetime asc";
 				}
+			}else {
+				//查询上下游车辆信息
 			}
 
 			// 查询，使用HQL语句
@@ -118,7 +117,7 @@ public class WMReport extends HttpServlet {
 			Transaction transaction = session.beginTransaction();
 			Query query = session.createQuery(hql);
 			@SuppressWarnings("unchecked")
-			List<Car> cars = query.list();
+			List<Car2> cars = query.list();
 			transaction.commit();
 
 			// 生成要封装成json的map集合
@@ -139,7 +138,7 @@ public class WMReport extends HttpServlet {
 				int rowCount = 0;
 				for (int i = 0; i < 24; i++) {
 					int count = 0;
-					for (Car car : cars) {
+					for (Car2 car : cars) {
 						Timestamp carTime = car.getDatetime();
 						Timestamp hourTime = new Timestamp(
 								stime.getTime() + 1000 * 60 * 60);
@@ -157,7 +156,10 @@ public class WMReport extends HttpServlet {
 				}
 				map_.put("number", rowCount);
 				list.add(map_);
+				System.out.println("rowCount:"+rowCount);
+				int averageNum = rowCount/24;
 			}
+						
 
 			Map<String, Object> map__ = new HashMap<String, Object>();
 			map__.put("time", "总数");
@@ -165,7 +167,18 @@ public class WMReport extends HttpServlet {
 			for (int i = 0; i < 24; i++) {
 				map__.put("hour" + (i + 1), columnCount.get(i));
 				total += columnCount.get(i);
+				System.out.print("columnCount.get(i):"+columnCount.get(i));
 			}
+			System.out.println("总数为："+total);
+			//平均数为averageNum
+			int averageNum = total/24;
+			List<Integer> averageTime = new ArrayList<Integer>();
+			for (int i = 0; i < 24; i++) {
+				if (columnCount.get(i)>averageNum) {
+					averageTime.add(i+1);
+				}
+			}
+			map__.put("fastigium", averageTime.toString());
 			map__.put("number", total);
 			list.add(map__);
 

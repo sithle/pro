@@ -98,6 +98,7 @@
 				<th field="hour22" width="33" align="center">22点</th>
 				<th field="hour23" width="33" align="center">23点</th>
 				<th field="hour24" width="33" align="center">24点</th>
+				<th field="fastigium" width="70" align="center">高峰时段</th>
 				<th field="number" width="33" align="center">总数</th>
 			</tr>
 		</thead>
