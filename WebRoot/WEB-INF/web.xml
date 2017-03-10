@@ -97,7 +97,9 @@
     <servlet-name>Blacklist</servlet-name>
     <url-pattern>/servlet/Blacklist</url-pattern>
   </servlet-mapping>
-
+<listener> 
+<listener-class>pro.servlet.action.ContextListener</listener-class> 
+</listener> 
 
 	
 
