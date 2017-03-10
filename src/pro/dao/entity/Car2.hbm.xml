@@ -9,7 +9,7 @@
             <column name="id" />
             <generator class="increment"></generator>
         </id>
-        <property name="stream" type="java.lang.String" column="adress"/>
+        <property name="stream" type="java.lang.String" column="address"/>
         <property name="photo" type="java.lang.String" column="picturepath"/>
                 <property name="lane" type="java.lang.String">
             <column name="roadnumber" />
