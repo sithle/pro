@@ -50,6 +50,7 @@ public class News {
 
 	public News(String title, String author, Date date,String author2) {
 		super();
+
 		this.title = title;
 		this.author = author;
 		this.date = date;

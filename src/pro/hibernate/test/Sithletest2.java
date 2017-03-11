@@ -1,24 +1,28 @@
 package pro.hibernate.test;
-
-//import static org.junit.Assert.*;
-
 import java.util.Date;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.metamodel.relational.Database;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
+
+import static org.junit.Assert.*;
+import pro.dao.entity.Alarm;
 import org.junit.Test;
 
-import pro.dao.entity.News;
-
-public class HibernateTest {
-
+public class Sithletest2 {
 	@Test
-	public void main() {
+	public void test() {
+	    java.util.Date javaDate = new java.util.Date();
+	    long javaTime = javaDate.getTime();
+
+	    long starttime=javaTime-3600*1000;
+	    long endtime=javaTime;
+	    
+	    java.sql.Timestamp satrtTimestamp = new java.sql.Timestamp(starttime);
+	    java.sql.Timestamp endTimestamp = new java.sql.Timestamp(endtime);
 		//1.创建sessionFactory对象
 		
 		SessionFactory sessionFactory = null;
@@ -38,8 +42,8 @@ public class HibernateTest {
 		//3.开启事物
 		Transaction transaction = session.beginTransaction();
 		//4.试行保存操作
-		News news = new News("Java2", "liujin", new Date(new java.util.Date().getTime()),"test");
-		session.save(news);
+		Alarm alarms = new Alarm(satrtTimestamp, endTimestamp, "测试");
+		session.save(alarms);
 		//5.提交事物
 		
 		transaction.commit();
@@ -50,8 +54,8 @@ public class HibernateTest {
 		
 		sessionFactory.close();
 		
-		
-		
+	
 	}
+
 
 }

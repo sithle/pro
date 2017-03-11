@@ -51,7 +51,7 @@
 		<mapping resource="pro/dao/entity/Car.hbm.xml" />
 		<mapping resource="pro/dao/entity/Stream.hbm.xml" />
 		<mapping resource="pro/dao/entity/User.hbm.xml" />
-		
+		<mapping resource="pro/dao/entity/Alarm.hbm.xml" />
 		<mapping resource="pro/dao/entity/News.hbm.xml" />
 		<mapping resource="pro/dao/entity/Car2.hbm.xml" />
 
