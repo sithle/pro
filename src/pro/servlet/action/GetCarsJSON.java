@@ -232,7 +232,7 @@ public class GetCarsJSON extends HttpServlet {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
 				CreateExcel
-						.getExcel(sheetname, excelname + ".xls", cars, count);
+						.getExcel(sheetname, excelname + ".xls", cars, count,start_time,end_time);
 				
 				out.println("<!DOCTYPE HTML>");
 				out.println("<HTML>");

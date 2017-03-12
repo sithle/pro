@@ -6,9 +6,12 @@ import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 import pro.dao.entity.Car;
 
@@ -40,67 +43,199 @@ public class CreateExcel {
 	 */
 	@SuppressWarnings("deprecation")
 	public static void getExcel(String sheetName, String excelName,
-			List<Car> list, int count) {
+			List<Car> list, int count,String starttime,String endtime) {  //已更新 by sithle
 		// 第一步，创建一个webbook，对应一个Excel文件
-		HSSFWorkbook wb = new HSSFWorkbook();
-		// 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
-		HSSFSheet sheet = wb.createSheet(sheetName);
-		// 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
-		HSSFRow row = sheet.createRow((int) 0);
-		// 第四步，创建单元格，并设置值表头 设置表头居中
-		HSSFCellStyle style = wb.createCellStyle();
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+		 HSSFWorkbook workbook = new HSSFWorkbook();
+			HSSFSheet sheet = workbook.createSheet("Test");// 创建工作表(Sheet)
+			HSSFCellStyle style = workbook.createCellStyle();
+			style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style.setWrapText(true);
+			
+			HSSFFont font = workbook.createFont();
+			font.setFontName("楷体");
+			font.setFontHeightInPoints((short)16);
+			
+			HSSFFont font2 = workbook.createFont();
+			font2.setFontName("楷体");
+			font2.setFontHeightInPoints((short)12);
+			String a="中心天兴洲大桥车辆明细表";
+			String b=starttime+" —— "+endtime;
+			String[] subStr ={a,b};
+			String sText = subStr[0]+"\r\n"  + subStr[1];
+			HSSFRichTextString textString = new HSSFRichTextString(sText);
+			textString.applyFont( 
+					sText.indexOf(subStr[0]), 
+					sText.indexOf(subStr[0]) + subStr[0].length(),
+					font);
+			textString.applyFont( 
+					sText.indexOf(subStr[1]), 
+					sText.indexOf(subStr[1]) + subStr[1].length(),
+					font2);
+			
+			//style.setFont(font);
+			HSSFRow row = sheet.createRow(0);
+			sheet.setColumnWidth(0, 20 * 256);
+			sheet.setColumnWidth(1, 11 * 256);
+			sheet.setColumnWidth(2, 11 * 256);
+			sheet.setColumnWidth(3, 11 * 256);
+			sheet.setColumnWidth(4, 11 * 256);
+			sheet.setColumnWidth(5, 16 * 256);
+			sheet.setColumnWidth(6, 18 * 256);
+			sheet.setColumnWidth(7, 16 * 256);
+			row.setHeightInPoints(43);
+			HSSFCell cell=row.createCell(0);
+			
 
-		HSSFCell cell = row.createCell((short) 0);
-		cell.setCellValue("时间");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 1);
-		cell.setCellValue("车道");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 2);
-		cell.setCellValue("车速（km/h）");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 3);
-		cell.setCellValue("重量（吨）");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 4);
-		cell.setCellValue("轴数（个）");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 5);
-		cell.setCellValue("车牌号");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 6);
-		cell.setCellValue("照片地址");
-		cell.setCellStyle(style);
-		cell = row.createCell((short) 7);
-		cell.setCellValue("上/下游");
-		cell.setCellStyle(style);
-
-		// 第五步，写入实体数据 实际应用中这些数据从数据库得到，
-		for (int i = 0; i < list.size(); i++) {
-			row = sheet.createRow((int) i + 1);
-			Car car = (Car) list.get(i);
-			// 第四步，创建单元格，并设置值
-			row.createCell((short) 0)
-					.setCellValue(car.getDatetime().toString());
-			row.createCell((short) 1).setCellValue(car.getLane());
-			row.createCell((short) 2).setCellValue( car.getVelocity());
-			row.createCell((short) 3).setCellValue( car.getWeight());
-			row.createCell((short) 4).setCellValue(car.getAxis());
-			row.createCell((short) 5).setCellValue(car.getCarnumber());
-			row.createCell((short) 6).setCellValue(car.getPhoto());
-			row.createCell((short) 7).setCellValue(car.getStream());
-		}
-		row = sheet.createRow((int) list.size() + 1);
-		row.createCell((short) 0).setCellValue("超重数量：");
-		row.createCell((short) 1).setCellValue((int) count);
-		row.createCell((short) 2).setCellValue("车辆总数：");
-		row.createCell((short) 3).setCellValue((int) list.size());
+			
+			
+			CellRangeAddress region=new CellRangeAddress(0, 0, 0, 7);
+			sheet.addMergedRegion(region);
+			cell.setCellValue(textString);
+			cell.setCellStyle(style);
+			
+			
+			
+			HSSFRow row1_ = sheet.createRow((int) 1);
+			row1_.setHeightInPoints(22);
+			HSSFCellStyle style1_ = workbook.createCellStyle();
+			style1_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style1_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style1_.setBorderTop(HSSFCellStyle. BORDER_MEDIUM);
+			style1_.setBorderBottom(HSSFCellStyle. BORDER_MEDIUM);
+			style1_.setBorderLeft(HSSFCellStyle. BORDER_MEDIUM);
+			style1_.setBorderRight(HSSFCellStyle. BORDER_THIN);
+			HSSFFont font1_ = workbook.createFont();
+			font1_.setFontName("宋体");
+			font1_.setFontHeightInPoints((short)10);
+			style1_.setFont(font1_);
+			
+			HSSFCellStyle style2_ = workbook.createCellStyle();
+			style2_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style2_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style2_.setBorderTop(HSSFCellStyle. BORDER_MEDIUM);
+			style2_.setBorderBottom(HSSFCellStyle. BORDER_MEDIUM);
+			style2_.setBorderRight(HSSFCellStyle. BORDER_THIN);
+			style2_.setFont(font1_);
+			
+			HSSFCellStyle style3_ = workbook.createCellStyle();
+			style3_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style3_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style3_.setBorderTop(HSSFCellStyle. BORDER_MEDIUM);
+			style3_.setBorderBottom(HSSFCellStyle. BORDER_MEDIUM);
+			style3_.setBorderRight(HSSFCellStyle. BORDER_MEDIUM);
+			style3_.setFont(font1_);
+			
+			HSSFCellStyle style4_ = workbook.createCellStyle();
+			style4_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style4_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style4_.setBorderLeft(HSSFCellStyle. BORDER_MEDIUM);
+			style4_.setBorderBottom(HSSFCellStyle. BORDER_THIN);
+			style4_.setBorderRight(HSSFCellStyle. BORDER_THIN);
+			style4_.setFont(font1_);
+			
+			HSSFCellStyle style5_ = workbook.createCellStyle();
+			style5_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style5_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style5_.setBorderBottom(HSSFCellStyle. BORDER_THIN);
+			style5_.setBorderRight(HSSFCellStyle. BORDER_THIN);
+			style5_.setFont(font1_);
+			
+			HSSFCellStyle style6_ = workbook.createCellStyle();
+			style6_.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个水平居中格式
+			style6_.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+			style6_.setBorderBottom(HSSFCellStyle. BORDER_THIN);
+			style6_.setBorderRight(HSSFCellStyle. BORDER_MEDIUM);
+			style6_.setFont(font1_);
+			
+			
+			HSSFCell cell1=row1_.createCell(0);
+			cell1.setCellValue("时间");
+			cell1.setCellStyle(style1_);
+			cell1 = row1_.createCell(1);
+			cell1.setCellValue("车道");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(2);
+			cell1.setCellValue("车速（km/h）");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(3);
+			cell1.setCellValue("重量（吨）");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(4);
+			cell1.setCellValue("轴数（个）");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(5);
+			cell1.setCellValue("车牌号");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(6);
+			cell1.setCellValue("照片地址");
+			cell1.setCellStyle(style2_);
+			cell1 = row1_.createCell(7);
+			cell1.setCellValue("上/下游");
+			cell1.setCellStyle(style3_);
+			for (int i = 1; i < list.size(); i++) {
+				//System.out.println("test：" + i);
+				row = sheet.createRow((int) i + 1);
+				row.setHeightInPoints(22);
+				Car car = (Car) list.get(i);
+				// 第四步，创建单元格，并设置值
+				HSSFCell cell0_=row.createCell(0);
+				cell0_.setCellStyle(style4_);
+				cell0_.setCellValue(car.getDatetime().toString().substring(0, 19));
+				HSSFCell cell1_=row.createCell(1);
+				cell1_.setCellValue(car.getLane());
+				cell1_.setCellStyle(style5_);
+				HSSFCell cell2_=row.createCell(2);
+				cell2_.setCellValue( car.getVelocity());
+				cell2_.setCellStyle(style5_);
+				HSSFCell cell3_=row.createCell(3);
+				cell3_.setCellValue( car.getWeight());
+				cell3_.setCellStyle(style5_);
+				HSSFCell cell4_=row.createCell(4);
+				cell4_.setCellValue(car.getAxis());
+				cell4_.setCellStyle(style5_);
+				HSSFCell cell5_=row.createCell(5);
+				cell5_.setCellValue(car.getCarnumber());
+				cell5_.setCellStyle(style5_);
+				HSSFCell cell6_=row.createCell(6);
+				cell6_.setCellValue(car.getPhoto());
+				cell6_.setCellStyle(style5_);
+				HSSFCell cell7_=row.createCell(7);
+				cell7_.setCellValue(car.getStream());
+				cell7_.setCellStyle(style6_);
+			}
+			
+			row = sheet.createRow((int) list.size() + 1);
+			row.setHeightInPoints(22);
+			HSSFCell cell0_=row.createCell(0);
+			cell0_.setCellStyle(style1_);
+			cell0_.setCellValue("超重数量：");
+			HSSFCell cell1_=row.createCell(1);
+			cell1_.setCellStyle(style2_);
+			cell1_.setCellValue((int)count);
+			HSSFCell cell2_=row.createCell(2);
+			cell2_.setCellStyle(style2_);
+			cell2_.setCellValue("车辆总数：");
+			HSSFCell cell3_=row.createCell(3);
+			cell3_.setCellStyle(style2_);
+			cell3_.setCellValue((int) list.size());
+			HSSFCell cell4_=row.createCell(4);
+			cell4_.setCellStyle(style2_);
+			cell4_.setCellValue("\\");
+			HSSFCell cell5_=row.createCell(5);
+			cell5_.setCellStyle(style2_);
+			cell5_.setCellValue("\\");
+			HSSFCell cell6_=row.createCell(6);
+			cell6_.setCellStyle(style2_);
+			cell6_.setCellValue("/");
+			HSSFCell cell7_=row.createCell(7);
+			cell7_.setCellStyle(style3_);
+			cell7_.setCellValue("/");
 
 		// 第六步，将文件存到指定位置
 		try {
 			FileOutputStream fout = new FileOutputStream(Path + excelName);
-			wb.write(fout);
+			workbook.write(fout);
 			fout.close();
 			// System.out.println("Excel表导出成功！");
 		} catch (Exception e) {
