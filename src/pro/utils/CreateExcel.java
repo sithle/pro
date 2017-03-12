@@ -52,19 +52,19 @@ public class CreateExcel {
 			style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
 			style.setWrapText(true);
 			
-			HSSFFont font = workbook.createFont();
+			HSSFFont font = workbook.createFont();//设置首行标题字体
 			font.setFontName("楷体");
 			font.setFontHeightInPoints((short)16);
 			
-			HSSFFont font2 = workbook.createFont();
+			HSSFFont font2 = workbook.createFont();//设置首行日期字体
 			font2.setFontName("楷体");
 			font2.setFontHeightInPoints((short)12);
 			String a="中心天兴洲大桥车辆明细表";
 			String b=starttime+" —— "+endtime;
 			String[] subStr ={a,b};
 			String sText = subStr[0]+"\r\n"  + subStr[1];
-			HSSFRichTextString textString = new HSSFRichTextString(sText);
-			textString.applyFont( 
+			HSSFRichTextString textString = new HSSFRichTextString(sText); 
+			textString.applyFont( 										//为首行的标题和日期设置不同的字体
 					sText.indexOf(subStr[0]), 
 					sText.indexOf(subStr[0]) + subStr[0].length(),
 					font);
@@ -74,8 +74,8 @@ public class CreateExcel {
 					font2);
 			
 			//style.setFont(font);
-			HSSFRow row = sheet.createRow(0);
-			sheet.setColumnWidth(0, 20 * 256);
+			HSSFRow row = sheet.createRow(0);			
+			sheet.setColumnWidth(0, 20 * 256);				//定义每列宽度
 			sheet.setColumnWidth(1, 11 * 256);
 			sheet.setColumnWidth(2, 11 * 256);
 			sheet.setColumnWidth(3, 11 * 256);
@@ -89,7 +89,7 @@ public class CreateExcel {
 
 			
 			
-			CellRangeAddress region=new CellRangeAddress(0, 0, 0, 7);
+			CellRangeAddress region=new CellRangeAddress(0, 0, 0, 7);  //首行1~8列单元格合并
 			sheet.addMergedRegion(region);
 			cell.setCellValue(textString);
 			cell.setCellStyle(style);
