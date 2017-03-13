@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String WMReportServlet = basePath + "servlet/WMReport";
+	String GetDangerousCars = basePath + "servlet/GetDangerousCars";
 
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
@@ -31,12 +31,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>周月汇总</title>
+<title>危险数据统计查询报表</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<meta http-equiv="description" content="情况汇总">
+<meta http-equiv="description" content="危险数据统计查询报表">
 
 <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.3.2/themes/default/easyui.css" />
 <link rel="stylesheet" type="text/css" href="../jquery-easyui-1.3.2/themes/icon.css">
@@ -45,7 +45,7 @@
 <script type="text/javascript" src="../jquery-easyui-1.3.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/datagrid-detailview.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../js/wmReport.js"></script>
+<script type="text/javascript" src="../js/dangerousDataReport.js"></script>
 
 <style type="text/css">
 	.dv-table td{
@@ -61,45 +61,26 @@
 </head>
 
 <body onload="init()">
-	<h2><%=bridge_name%>周月汇总
+	<h2><%=bridge_name%>危险数据统计
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：起始时间必须以 xxxx-xx-xx 00:00:00 开始，结束时间最好以 xxxx-xx-xx 23:59:59结束</div>
+		<div>温馨提示：上游对应的端口号为<%=stream1_port %>; 下游对应的端口号为<%=stream2_port %>；默认危险重量为180t.</div>
 	</div>
 
-	<table id="dg" class="easyui-datagrid" style="width:1050px;height:435px"
-		url="<%=WMReportServlet %>" title="周月汇总" iconCls="icon-search" toolbar="#tb"
-		rownumbers="false" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
+	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
+		url="<%=GetDangerousCars%>" title="危险数据统计" iconCls="icon-search" toolbar="#tb"
+		rownumbers="true" pagination="true" singleSelect="true" fitColumns="false" showFooter="true" >
 		<thead>
 			<tr>
-				<th field="time" width="70" align="center"></th>
-				<th field="hour1" width="33" align="center">1点</th>
-				<th field="hour2" width="33" align="center">2点</th>
-				<th field="hour3" width="33" align="center">3点</th>
-				<th field="hour4" width="33" align="center">4点</th>
-				<th field="hour5" width="33" align="center">5点</th>
-				<th field="hour6" width="33" align="center">6点</th>
-				<th field="hour7" width="33" align="center">7点</th>
-				<th field="hour8" width="33" align="center">8点</th>
-				<th field="hour9" width="33" align="center">9点</th>
-				<th field="hour10" width="33" align="center">10点</th>
-				<th field="hour11" width="33" align="center">11点</th>
-				<th field="hour12" width="33" align="center">12点</th>
-				<th field="hour13" width="33" align="center">13点</th>
-				<th field="hour14" width="33" align="center">14点</th>
-				<th field="hour15" width="33" align="center">15点</th>
-				<th field="hour16" width="33" align="center">16点</th>
-				<th field="hour17" width="33" align="center">17点</th>
-				<th field="hour18" width="33" align="center">18点</th>
-				<th field="hour19" width="33" align="center">19点</th>
-				<th field="hour20" width="33" align="center">20点</th>
-				<th field="hour21" width="33" align="center">21点</th>
-				<th field="hour22" width="33" align="center">22点</th>
-				<th field="hour23" width="33" align="center">23点</th>
-				<th field="hour24" width="33" align="center">24点</th>
-				<th field="fastigium" width="70" align="center">高峰时段</th>
-				<th field="number" width="33" align="center">总数</th>
+				<th field="datetime" width="140" align="center">时间</th>
+				<th field="lane" width="100" align="center">车道</th>
+				<th field="velocity" width="100" align="center">车速（km/h）</th>
+				<th field="weight" width="100" align="center" sortable="true">重量（吨）</th>
+				<th field="axis" width="100" align="center">轴数（个）</th>
+				<th field="carnumber" width="100" align="center">车牌号</th>
+				<th field="photo" width="140" align="center">照片地址</th>
+				<th field="stream" width="100" align="center">上/下游</th>
 			</tr>
 		</thead>
 	</table>
@@ -109,8 +90,9 @@
 		上/下游：<input id="streamInput" class="easyui-combobox" style="width:50px"
 					url="data/combobox_data.json"
 					valueField="id" textField="text"/>
-		超重标准(吨)：<input id="weightStandard" type="text" class="easyui-text" style="width: 30px" value="<%=weight_standard %>" />
-		<a id="queryBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">汇总</a>
+		重量(吨)>=<input id="weightInput" type="text" class="easyui-text" style="width: 40px" />
+		<%-- 超重标准(吨)：<input id="weightStandard" type="text" class="easyui-text" style="width: 30px" value="<%=weight_standard %>" /> --%>
+		<a id="queryBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">查询</a>
 		<a id="excelBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'" onclick="getExcelDialog()">Excel</a>
 	</div>
 	<div id="dlg" class="easyui-dialog"
@@ -137,6 +119,10 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" 
 			onclick="excelCancel()">取消</a>
 	</div>
+	<div id="menu" class="easyui-menu" style="display: none;">  
+	      <!--放置一个隐藏的菜单Div-->  
+	      <div id="btn_More" data-options="iconCls:'icon-remove'" style="width: 150px;" align="center" onclick="playback()">全景视频查看</div>        
+	</div> 
 	
 	<input id="stream1_port" type="text" value="<%=stream1_port %>" style="width:0;height:0" />
 	<input id="stream2_port" type="text" value="<%=stream2_port %>" style="width:0;height:0" />

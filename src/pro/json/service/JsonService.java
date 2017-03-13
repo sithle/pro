@@ -71,6 +71,7 @@ public class JsonService {
 	 * @return
 	 */
 	public static String getStream_name(String stream) {
+		System.out.println("streamName:"+stream);
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "from Stream s where s.stream_name like '%" + stream
 				+ "%'";
