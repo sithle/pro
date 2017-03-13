@@ -49,7 +49,7 @@ public class Blacklist extends HttpServlet {
 			String stream = request.getParameter("stream");
 			double weight = Double.valueOf(request
 					.getParameter("weightStandard"));
-			int total = Integer.valueOf(request
+			int total_ = Integer.valueOf(request
 					.getParameter("total"));
 
 			Map<String,Integer> map = new HashMap();
@@ -203,7 +203,7 @@ public class Blacklist extends HttpServlet {
 			Iterator<Car> it = cars.iterator();
 			while(it.hasNext()){
 				Car car=(Car)it.next();
-				if(map.get(car.getCarnumber())<=total-1){
+				if(map.get(car.getCarnumber())<=total_-1){
 					it.remove();
 					
 				}
@@ -300,7 +300,22 @@ public class Blacklist extends HttpServlet {
 			out.println(resultJSONString);
 			System.out.println(resultJSONString);
 
-
+			if (request.getParameter("isGetExcel").equals("1")) {
+				String sheetname = request.getParameter("sheetname");
+				String excelname = request.getParameter("excelname");
+				CreateExcel
+						.getBlacklistExcel(sheetname, excelname + ".xls",list,start_time,end_time);
+				
+				out.println("<!DOCTYPE HTML>");
+				out.println("<HTML>");
+				//自动跳转
+				out.print("<meta http-equiv= refresh content=3;url=http://192.168.6.123:8080/pro/servlet/DownloadServlet?filename="+excelname+".xls>");
+				out.println("  <HEAD><TITLE></TITLE></HEAD>");
+				out.println("  <BODY>");
+				out.println("<div class='alert alert-success'>正在下载...</div>");
+				out.println("  </BODY>");
+				out.println("</HTML>");
+			}
 
 
 	}

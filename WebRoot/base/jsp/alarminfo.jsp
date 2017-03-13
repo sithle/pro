@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String GetCarsJSONServlet = basePath + "servlet/Blacklist";
+	String GetCarsJSONServlet = basePath + "servlet/Alarminfo";
 
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
@@ -45,7 +45,7 @@
 <script type="text/javascript" src="../jquery-easyui-1.3.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/datagrid-detailview.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../js/blacklist.js"></script>
+<script type="text/javascript" src="../js/alarminfo.js"></script>
 
 <style type="text/css">
 	.dv-table td{
@@ -61,40 +61,33 @@
 </head>
 
 <body onload="init()">
-	<h2><%=bridge_name%>黑名单查询
+	<h2><%=bridge_name%>报警信息查询
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
 		<div>温馨提示：</div>
 	</div>
 
-	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
-		url="<%=GetCarsJSONServlet %>" title="黑名单" iconCls="icon-search" toolbar="#tb"
+	<table id="dg" class="easyui-datagrid" style="width:750px;height:435px"
+		url="<%=GetCarsJSONServlet %>" title="报警信息" iconCls="icon-search" toolbar="#tb"
 		rownumbers="true" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
 		<thead>
 			<tr>
-				<th field="carnumber" width="130" align="center">车牌</th>
-				<th field="total" width="100" align="center">通过次数</th>
-				<th field="axis" width="100" align="center">轴数</th>
-				<th field="weightest" width="130" align="center">最重时重量（吨）</th>
-				<th field="latest" width="130" align="center">最近一次通过时间</th>
-				
-				<th field="latestweight" width="130" align="center">最近一次重量（吨）</th>
+				<th field="starttime" width="150" align="center">起始时间</th>
+				<th field="endtime" width="150" align="center">结束时间</th>
+				<th field="info" width="280" align="center">报警信息</th>
+
 				
 				
 			</tr>
 		</thead>
 	</table>
 	<div id="tb" style="padding:3px">
-		起始时间： <input id="start_timeInput" class="easyui-datetimebox" style="width:160px"/>
-		结束时间：<input id="end_timeInput" class="easyui-datetimebox" style="width:160px"/>
-		上/下游：<input id="streamInput" class="easyui-combobox" style="width:50px"
-					url="data/combobox_data.json"
-					valueField="id" textField="text"/>
-		标准(吨)：<input id="weightStandard" type="text" class="easyui-text" style="width: 30px" value="100" />
-		通过次数：<input id="total" type="text" class="easyui-text" style="width: 30px" value="2" />
-		<a id="queryBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">汇总</a>
-		<a id="excelBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'" onclick="getExcelDialog()">Excel</a>
+		起始时间： <input id="start_timeInput" class="easyui-datebox" style="width:160px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		结束时间：<input id="end_timeInput" class="easyui-datebox" style="width:160px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<a id="queryBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">查询</a>
+		
 	</div>
 	<div id="dlg" class="easyui-dialog"
 		style="width:300px;height:150px;padding:10px 20px" closed="true"

@@ -92,6 +92,16 @@
 				"icon" : "icon-nav",
 				"url" : "base/jsp/dayReport.jsp"
 			} , {
+				"menuid" : "46",
+				"menuname" : "黑名单汇总",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/blacklist.jsp"
+			},{
+				"menuid" : "47",
+				"menuname" : "报警信息",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/alarminfo.jsp"
+			},{
 				"menuid" : "45",
 				"menuname" : "Excel下载",
 				"icon" : "icon-nav",
