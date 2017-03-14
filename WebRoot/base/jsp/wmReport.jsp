@@ -68,7 +68,7 @@
 		<div>温馨提示：起始时间必须以 xxxx-xx-xx 00:00:00 开始，结束时间最好以 xxxx-xx-xx 23:59:59结束</div>
 	</div>
 
-	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
+	<table id="dg" class="easyui-datagrid" style="width:1050px;height:435px"
 		url="<%=WMReportServlet %>" title="周月汇总" iconCls="icon-search" toolbar="#tb"
 		rownumbers="false" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
 		<thead>

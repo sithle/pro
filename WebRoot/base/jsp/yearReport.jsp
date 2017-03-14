@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String dayReportServlet = basePath + "servlet/DayReport";
+	String dayReportServlet = basePath + "servlet/YearReport";
 
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
