@@ -600,9 +600,9 @@ public class CreateExcel {
 			cell1.setCellValue("最近一次重量（吨）");
 			cell1.setCellStyle(style3_);
 			
-			for (int i = 1; i < list.size(); i++) {
+			for (int i = 0; i < list.size(); i++) {
 				//System.out.println("test：" + i);
-				row = sheet.createRow((int) i + 1);
+				row = sheet.createRow((int) i + 2);
 				row.setHeightInPoints(22);
 				Map<String, Object> map=list.get(i);
 				// 第四步，创建单元格，并设置值
@@ -625,7 +625,7 @@ public class CreateExcel {
 				cell5_.setCellValue((Double)map.get("latestweight"));
 				cell5_.setCellStyle(style6_);
 			                                  }
-			row = sheet.createRow((int) list.size() + 1);
+			row = sheet.createRow((int) list.size() + 2);
 			row.setHeightInPoints(22);
 			HSSFCell cell0_=row.createCell(0);
 			cell0_.setCellStyle(style1_);
