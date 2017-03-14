@@ -186,7 +186,7 @@ public class WeekExcel {
 			cell2.setCellStyle(style2_);
 			cell2 = row.createCell(4);
 			cell2.setCellStyle(style3_);
-			CellRangeAddress region2=new CellRangeAddress(list.size()+1, list.size()+1, 0, 4);  //首行1~5列单元格合并
+			CellRangeAddress region2=new CellRangeAddress(list.size()+2, list.size()+2, 0, 4);  //首行1~5列单元格合并
 			sheet.addMergedRegion(region2);
 			
 			row = sheet.createRow(list.size()+ 3);

@@ -78,15 +78,20 @@ public class MonthReport extends HttpServlet {
 			catch (ParseException e) {
 				System.out.println(e.getMessage());
 			}
-			for(int i=1;i<8;i++)
-			{
 			Calendar cal=Calendar.getInstance();
 			cal.setTime(date);
-			cal.add(Calendar.DATE, i);
+			cal.set(Calendar.DATE, 1);
+			cal.roll(Calendar.DATE, -1);
+			int maxDate = cal.get(Calendar.DATE); 
+			cal.set(Calendar.DATE, 1);
 			dateString_=sdf.format(cal.getTime());
-			datelist.add(dateString_);
-			//System.out.println(dateString_);
-			}
+			//datelist.add(dateString_);
+			for(int i=0;i<maxDate;i++)
+				{
+				cal.add(Calendar.DATE, 1);
+				dateString_=sdf.format(cal.getTime());
+				datelist.add(dateString_);
+				}
 			System.out.println(datelist);
 			for(int i=0;i<datelist.size()-1;i++)
 				{	
@@ -139,7 +144,7 @@ public class MonthReport extends HttpServlet {
 					list.add(map_1);
 					map_2.put("address", "上游日均");
 					map_2.put("date", "\\");
-					map_2.put("num", total_1/7);
+					map_2.put("num", total_1/maxDate);
 					map_2.put("over55", "/");
 					map_2.put("over75", "/");
 					list.add(map_2);
@@ -196,7 +201,7 @@ public class MonthReport extends HttpServlet {
 					list.add(map_3);
 					map_4.put("address", "下游日均");
 					map_4.put("date", "\\");
-					map_4.put("num", total_2/7);
+					map_4.put("num", total_2/maxDate);
 					map_4.put("over55", "/");
 					map_4.put("over75", "/");
 					list.add(map_4);
@@ -208,7 +213,7 @@ public class MonthReport extends HttpServlet {
 					list.add(map_5);
 					map_6.put("address", "本周日平均数");
 					map_6.put("date", "\\");
-					map_6.put("num", (total_2+total_1)/7);
+					map_6.put("num", (total_2+total_1)/maxDate);
 					map_6.put("over55", "/");
 					map_6.put("over75", "/");
 					list.add(map_6);
@@ -229,7 +234,7 @@ public class MonthReport extends HttpServlet {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
 				WeekExcel
-						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(7));
+						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(maxDate));
 				
 				out.println("<!DOCTYPE HTML>");
 				out.println("<HTML>");

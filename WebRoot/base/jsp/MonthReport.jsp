@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String GetCarsJSONServlet = basePath + "servlet/WeekReport";
+	String GetCarsJSONServlet = basePath + "servlet/MonthReport";
 
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
