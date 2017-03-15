@@ -31,7 +31,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>按天汇总</title>
+<title>按年汇总</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -61,22 +61,23 @@
 </head>
 
 <body onload="init()">
-	<h2><%=bridge_name%>按天汇总
+	<h2><%=bridge_name%>年度超重车辆统计
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：起始时间必须以 xxxx-xx-xx 00:00:00 开始，结束时间最好以 xxxx-xx-xx 23:59:59结束</div>
+		<div>温馨提示：所查数据量较大，</div>
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
-		url="<%=dayReportServlet %>" title="按天汇总" iconCls="icon-search" toolbar="#tb"
+		url="<%=dayReportServlet %>" title="按年汇总" iconCls="icon-search" toolbar="#tb"
+		method="POST"
 		rownumbers="false" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
 		<thead>
 			<tr>
 				<th field="place" width="130" align="center">地点</th>
 				<th field="time" width="130" align="center">时间</th>
-				<th field="weightest" width="80" align="center">最重</th>
-				<th field="totalnumber" width="80" align="center">车辆总数</th>
+				<!-- <th field="weightest" width="80" align="center">最重</th>
+				<th field="totalnumber" width="80" align="center">车辆总数</th> -->
 				<th field="overnumber" width="80" align="center">超重总数</th>
 				<th field="findcarnumber" width="80" align="center">找到车牌</th>
 				<th field="over55number" width="80" align="center">大于55吨</th>
@@ -89,6 +90,9 @@
 		结束时间：<input id="end_timeInput" class="easyui-datetimebox" style="width:160px"/>
 		上/下游：<input id="streamInput" class="easyui-combobox" style="width:50px"
 					url="data/combobox_data.json"
+					valueField="id" textField="text"/>
+		选择年份:<input id="yearInput" class="easyui-combobox" style="width:50px"
+					url="data/yearselect.json"
 					valueField="id" textField="text"/>
 		超重标准(吨)：<input id="weightStandard" type="text" class="easyui-text" style="width: 30px" value="<%=weight_standard %>" />
 		<a id="queryBtn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="query()">汇总</a>

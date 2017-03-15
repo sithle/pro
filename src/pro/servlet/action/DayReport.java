@@ -269,6 +269,18 @@ public class DayReport extends HttpServlet {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
 				CreateExcel.getDayExcel(sheetname, excelname + ".xls", map);
+				out.println("<!DOCTYPE HTML>");
+				out.println("<HTML>");
+				//自动跳转
+				out.print("<meta http-equiv= refresh content=3;url=http://192.168.6.123:8080/pro/servlet/DownloadServlet?filename="+excelname+".xls>");
+				out.println("  <HEAD><TITLE></TITLE></HEAD>");
+				out.println("  <BODY>");
+				out.println("<div class='alert alert-success'>正在下载...</div>");
+				out.println("  </BODY>");
+				out.println("</HTML>");
+			}
+			if (session != null) {
+				session.close();
 			}
 		}
 

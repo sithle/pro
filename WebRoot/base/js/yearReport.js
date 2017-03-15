@@ -7,11 +7,14 @@ function init() {
 function query() {
 	/*var starttime = $('#start_timeInput').datetimebox('getValue');
 	var endtime = $('#end_timeInput').datetimebox('getValue');*/
-	var starttime = $('#start_timeInput').datebox('getValue');
-	var endtime = $('#end_timeInput').datebox('getValue');
+	var starttime = $('#start_timeInput').datetimebox('getValue');
+	var endtime = $('#end_timeInput').datetimebox('getValue');
+	
 	console.log(starttime);
-	if (starttime != "" && endtime != "") {
+	if (starttime != "" && endtime!="") {
 		var stream = $('#streamInput').combobox('getText');
+		var year_time = $('#yearInput').combobox('getText');
+		alert(stream+year_time);
 		document.getElementById('weightStandard').disabled = false;
 		var weightStandard = $('#weightStandard').val();
 		document.getElementById('weightStandard').disabled = true;
@@ -19,14 +22,17 @@ function query() {
 		$('#dg').datagrid('load', {
 			/*start_time : $('#start_timeInput').datetimebox('getValue'),
 			end_time : $('#end_timeInput').datetimebox('getValue'),*/
+//			method:"post",
+			
 			start_time : starttime,
 			end_time : endtime,
+			year_text : year_time,
 			stream : stream,
 			isGetExcel : 0,
 			weightStandard : weightStandard
 		});
 	} else {
-		alert("起始时间和终止时间不能为空！");
+		alert("起始时间不能为空！");
 	}
 }
 
@@ -48,15 +54,17 @@ function getExcelDialog() {
 // 导出Excel表函数
 function excelAction() {
 	var stream = $('#streamInput').combobox('getText');
+	var year = $('#yearInput').combobox('getText');
 	document.getElementById('weightStandard').disabled = false;
 	var weightStandard = $('#weightStandard').val();
 	document.getElementById('weightStandard').disabled = true;
 	$('#dg').datagrid('load', {
-		/*start_time : $('#start_timeInput').datetimebox('getValue'),
-		end_time : $('#end_timeInput').datetimebox('getValue'),*/
-		start_time : $('#start_timeInput').datebox('getValue'),
-		end_time : $('#end_timeInput').datebox('getValue'),
+		start_time : $('#start_timeInput').datetimebox('getValue'),
+		end_time : $('#end_timeInput').datetimebox('getValue'),
+		/*start_time : $('#start_timeInput').datebox('getValue'),
+		end_time : $('#end_timeInput').datebox('getValue'),*/
 		stream : stream,
+		year_text : year,
 		isGetExcel : 1,
 		weightStandard : weightStandard,
 		sheetname : $('#sheetname').val(),
