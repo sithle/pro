@@ -65,7 +65,7 @@
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：</div>
+		<div>温馨提示：起始时间请输入一周的起始时间</div>
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:750px;height:435px"

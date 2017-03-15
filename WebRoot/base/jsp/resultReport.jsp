@@ -122,5 +122,7 @@
 	
 	<input id="stream1_port" type="text" value="<%=stream1_port %>" style="width:0;height:0" />
 	<input id="stream2_port" type="text" value="<%=stream2_port %>" style="width:0;height:0" />
+	<script>$('#start_timeInput').datetimebox({showSeconds: false});</script>
+<script>$('#end_timeInput').datetimebox({showSeconds: false});</script>
 </body>
 </html>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import pro.dao.entity.Car2;
 import pro.dao.entity.Car;
 import pro.hibernate.util.HibernateUtil;
 import pro.json.service.JsonService;
@@ -40,33 +40,55 @@ public class GetRealTimeReportJSON extends HttpServlet {
 
 		String currentTime = request.getParameter("currentTime");
 		int stream = Integer.parseInt(request.getParameter("stream"));
-		
-		String car_s = "";
-		if(stream==1){
-			car_s = "上游";
-		}else if(stream==2){
-			car_s = "下游";
-		}
+		System.out.println(currentTime);
 
+		
+		
+		if(stream==1){
 		// 查询，使用HQL语句
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		// HQL语句
-		String hql = "from Car c where c.datetime >= str_to_date('"
-				+ currentTime + "','%Y-%m-%d %H:%i:%s') and c.stream='"
-				+ car_s + "'";
+		String hql = "from Car c where c.datetime >='"
+				+ currentTime +"' and c.flag='0'";
 		System.out.println("GetRealTimeReportJSON.java"+hql);
 		Query query = session.createQuery(hql);
 		List<Car> cars = new ArrayList<Car>();
 		cars = query.list();
-		System.out.println(cars);
+		System.out.println(hql);
 
 		// 把Car对象封装成JSON数据
 		String carsJSONString = JsonTools.createJsonString(JsonService
 				.getCarsList(cars));
 		System.out.println(carsJSONString);
 		out.println(carsJSONString);
-		transaction.commit();
+		transaction.commit();}
+		else if(stream==2){
+			// 查询，使用HQL语句
+			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+			Transaction transaction = session.beginTransaction();
+			// HQL语句
+			String hql = "from Car2 c where c.datetime >='"
+					+ currentTime +"' and c.flag='0'";
+			System.out.println("GetRealTimeReportJSON.java"+hql);
+			Query query = session.createQuery(hql);
+			List<Car2> car2s = new ArrayList<Car2>();
+			car2s = query.list();
+			System.out.println(hql);
+
+			// 把Car对象封装成JSON数据
+			String carsJSONString = JsonTools.createJsonString(JsonService
+					.getCar2sList(car2s));
+			System.out.println(carsJSONString);
+			out.println(carsJSONString);
+			transaction.commit();
+		}
+		
+		
+		
+		
+		
+		
 
 		out.flush();
 		out.close();

@@ -1,15 +1,15 @@
 
 // queryReport.jsp的初始化函数
 function init() {
-	document.getElementById('weightStandard').disabled = true;
+	document.getElementById('weightStandard').disabled = false;
 }
 
 // 查询函数
 function query() {
 	var stream = $('#streamInput').combobox('getText');
-	document.getElementById('weightStandard').disabled = false;
+	//document.getElementById('weightStandard').disabled = false;
 	var weightStandard = $('#weightStandard').val();
-	document.getElementById('weightStandard').disabled = true;
+	//document.getElementById('weightStandard').disabled = true;
 	// 载数据
 	$('#dg').datagrid('load', {
 		start_time : $('#start_timeInput').datetimebox('getValue'),
