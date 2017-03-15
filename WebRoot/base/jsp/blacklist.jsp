@@ -65,7 +65,7 @@
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：</div>
+		<div>温馨提示：默认查询100吨以上且通过两次的车辆</div>
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
@@ -123,5 +123,7 @@
 	
 	<input id="stream1_port" type="text" value="<%=stream1_port %>" style="width:0;height:0" />
 	<input id="stream2_port" type="text" value="<%=stream2_port %>" style="width:0;height:0" />
+	<script>$('#start_timeInput').datetimebox({showSeconds: false});</script>
+<script>$('#end_timeInput').datetimebox({showSeconds: false});</script>
 </body>
 </html>

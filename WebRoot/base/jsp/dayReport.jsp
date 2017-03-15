@@ -65,7 +65,7 @@
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：起始时间必须以 xxxx-xx-xx 00:00:00 开始，结束时间最好以 xxxx-xx-xx 23:59:59结束</div>
+		<div>温馨提示：起始时间必须以 xxxx-xx-xx 00:00 开始，结束时间最好以 xxxx-xx-xx 23:59结束</div>
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
@@ -121,5 +121,7 @@
 	
 	<input id="stream1_port" type="text" value="<%=stream1_port %>" style="width:0;height:0" />
 	<input id="stream2_port" type="text" value="<%=stream2_port %>" style="width:0;height:0" />
+	<script>$('#start_timeInput').datetimebox({showSeconds: false});</script>
+<script>$('#end_timeInput').datetimebox({showSeconds: false});</script>
 </body>
 </html>

@@ -6,18 +6,18 @@ function init() {
 // 查询函数
 function query() {
 	var starttime = $('#start_timeInput').datetimebox('getValue');
-	var endtime = $('#end_timeInput').datetimebox('getValue');
+	//var endtime = $('#end_timeInput').datetimebox('getValue');
 	console.log(starttime);
-	if (starttime != "" && endtime != "") {
-		var stream = $('#streamInput').combobox('getText');
+	if (starttime != "") {
+		//var stream = $('#streamInput').combobox('getText');
 		//document.getElementById('weightStandard').disabled = false;
 		var weightStandard = $('#weightStandard').val();
 		//document.getElementById('weightStandard').disabled = true;
 		// 载数据
 		$('#dg').datagrid('load', {
 			start_time : $('#start_timeInput').datetimebox('getValue'),
-			end_time : $('#end_timeInput').datetimebox('getValue'),
-			stream : stream,
+			//end_time : $('#end_timeInput').datetimebox('getValue'),
+			//stream : stream,
 			isGetExcel : 0,
 			weightStandard : weightStandard
 		});
@@ -29,8 +29,8 @@ function query() {
 // 弹出Excel表的基本信息设置对话框
 function getExcelDialog() {
 	var start_time = $('#start_timeInput').datetimebox('getValue');
-	var end_time = $('#end_timeInput').datetimebox('getValue');
-	if (start_time != "" && end_time != "") {
+	//var end_time = $('#end_timeInput').datetimebox('getValue');
+	if (start_time != "") {
 		$('#dlg').dialog('open').dialog('setTitle', 'Excel表基本信息');
 		document.getElementById("tb").style.display = "none";
 	} else {
@@ -41,14 +41,14 @@ function getExcelDialog() {
 
 // 导出Excel表函数
 function excelAction() {
-	var stream = $('#streamInput').combobox('getText');
-	document.getElementById('weightStandard').disabled = false;
+	//var stream = $('#streamInput').combobox('getText');
+	//document.getElementById('weightStandard').disabled = false;
 	var weightStandard = $('#weightStandard').val();
-	document.getElementById('weightStandard').disabled = true;
+	//document.getElementById('weightStandard').disabled = true;
 	$('#dg').datagrid('load', {
 		start_time : $('#start_timeInput').datetimebox('getValue'),
-		end_time : $('#end_timeInput').datetimebox('getValue'),
-		stream : stream,
+		//end_time : $('#end_timeInput').datetimebox('getValue'),
+		//stream : stream,
 		isGetExcel : 1,
 		weightStandard : weightStandard,
 		sheetname : $('#sheetname').val(),
