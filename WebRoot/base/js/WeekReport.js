@@ -1,6 +1,6 @@
 // queryReport.jsp的初始化函数
 function init() {
-	//document.getElementById('weightStandard').disabled = true;
+	document.getElementById('weightStandard').disabled = false;
 }
 
 // 查询函数

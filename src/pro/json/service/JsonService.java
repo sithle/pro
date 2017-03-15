@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-
+import pro.dao.entity.Car2;
 import pro.dao.entity.Car;
 import pro.dao.entity.Stream;
 import pro.hibernate.util.HibernateUtil;
@@ -47,6 +47,25 @@ public class JsonService {
 	public static List<Map<String, Object>> getCarsList(List<Car> cars) {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		for (Car car : cars) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("datetime", car.getDatetime().toString());
+			map.put("lane", car.getLane());
+			map.put("velocity", car.getVelocity());
+			map.put("weight", car.getWeight());
+			map.put("axis", car.getAxis());
+			map.put("carnumber", car.getCarnumber());
+			map.put("photo", car.getPhoto());
+			map.put("stream", car.getStream());
+			map.put("stream_name", getStream_name(car.getStream()));
+			map.put("stream_minute", getStream_minute(car.getStream()));
+			list.add(map);
+		}
+		return list;
+	}
+	
+	public static List<Map<String, Object>> getCar2sList(List<Car2> cars) {
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		for (Car2 car : cars) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("datetime", car.getDatetime().toString());
 			map.put("lane", car.getLane());

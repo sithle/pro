@@ -1,6 +1,7 @@
 // queryReport.jsp的初始化函数
 function init() {
-	document.getElementById('weightStandard').disabled = true;
+	//document.getElementById('weightStandard').disabled = true;
+	document.getElementById('weightStandard').disabled = false;
 }
 
 // 查询函数
@@ -9,12 +10,24 @@ function query() {
 	var endtime = $('#end_timeInput').datetimebox('getValue');*/
 	var starttime = $('#start_timeInput').datebox('getValue');
 	var endtime = $('#end_timeInput').datebox('getValue');
+	var wt = $('#weightStandard').val();
+	$("#dg").datagrid({  
+		columns: [[  { field: 'place', title:'地点', width: 130 },
+			     {	field: 'time', title:'时间', width: 130 },
+			     {  field: 'weightest', title:'最重', width: 80 },
+				{field: 'totalnumber', title:'车辆总数', width: 80 },
+				{field: 'overnumber', title:'超重总数（大于'+wt+'吨）', width: 130 },
+				{field: 'findcarnumber', title:'找到车牌', width: 80 },
+				{field: 'over55number', title:'大于55吨', width: 80 },
+				{field: 'over75number', title:'大于75吨', width: 80 },
+			]]  
+	}); 
 	console.log(starttime);
 	if (starttime != "" && endtime != "") {
 		var stream = $('#streamInput').combobox('getText');
-		document.getElementById('weightStandard').disabled = false;
+		//document.getElementById('weightStandard').disabled = false;
 		var weightStandard = $('#weightStandard').val();
-		document.getElementById('weightStandard').disabled = true;
+		//document.getElementById('weightStandard').disabled = true;
 		// 载数据
 		$('#dg').datagrid('load', {
 			/*start_time : $('#start_timeInput').datetimebox('getValue'),

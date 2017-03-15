@@ -102,6 +102,16 @@
 				"icon" : "icon-nav",
 				"url" : "base/jsp/alarminfo.jsp"
 			},{
+				"menuid" : "48",
+				"menuname" : "周报表",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/WeekReport.jsp"
+			},{
+				"menuid" : "49",
+				"menuname" : "月报表",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/MonthReport.jsp"
+			},{
 				"menuid" : "45",
 				"menuname" : "Excel下载",
 				"icon" : "icon-nav",

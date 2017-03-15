@@ -107,7 +107,7 @@ public class MonthReport extends HttpServlet {
 									+ "' and c.datetime <= '"
 									+ datelist.get(i+1)
 									+ "' and c.weight >= "
-									+ weight+"and flag='0'";
+									+ weight+"and c.flag='0'";
 					Query query2 = ss.createQuery(hqlString1);
 					int num=((Number)query2.uniqueResult()).intValue(); 
 					total_1+=num;
@@ -119,7 +119,7 @@ public class MonthReport extends HttpServlet {
 									+ "' and c.datetime <= '"
 									+ datelist.get(i+1)
 									+ "' and c.weight >= "
-									+ 55+"and flag='0'";
+									+ 55+"and c.flag='0'";
 					Query query3 = ss.createQuery(hqlString2);
 					int over55=((Number)query3.uniqueResult()).intValue(); 
 					over55_1+=over55;
@@ -129,7 +129,7 @@ public class MonthReport extends HttpServlet {
 							+ "' and c.datetime <= '"
 							+ datelist.get(i+1)
 							+ "' and c.weight >= "
-							+ 75+"and flag='0'";
+							+ 75+"and c.flag='0'";
 					Query query4 = ss.createQuery(hqlString3);
 					int over75=((Number)query4.uniqueResult()).intValue(); 
 					over75_1+=over75;
@@ -164,7 +164,7 @@ public class MonthReport extends HttpServlet {
 										+ "' and c.datetime <= '"
 										+ datelist.get(i+1)
 										+ "' and c.weight >= "
-										+ weight+"and flag='0'";
+										+ weight+"and c.flag='0'";
 						Query query2 = ss.createQuery(hqlString1);
 						int num=((Number)query2.uniqueResult()).intValue(); 
 						total_2+=num;
@@ -176,7 +176,7 @@ public class MonthReport extends HttpServlet {
 										+ "' and c.datetime <= '"
 										+ datelist.get(i+1)
 										+ "' and c.weight >= "
-										+ 55+"and flag='0'";
+										+ 55+"and c.flag='0'";
 						Query query3 = ss.createQuery(hqlString2);
 						int over55=((Number)query3.uniqueResult()).intValue(); 
 						over55_2+=over55;
@@ -186,7 +186,7 @@ public class MonthReport extends HttpServlet {
 								+ "' and c.datetime <= '"
 								+ datelist.get(i+1)
 								+ "' and c.weight >= "
-								+ 75+"and flag='0'";
+								+ 75+"and c.flag='0'";
 						Query query4 = ss.createQuery(hqlString3);
 						int over75=((Number)query4.uniqueResult()).intValue(); 
 						over75_2+=over75;

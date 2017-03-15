@@ -16,6 +16,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import pro.dao.entity.Car;
+import pro.dao.entity.Car2;
 import pro.hibernate.util.HibernateUtil;
 import pro.json.tools.JsonTools;
 import pro.utils.CreateExcel;
@@ -48,77 +49,124 @@ public class GetResultJSON extends HttpServlet {
 			String stream = request.getParameter("stream");
 			double weightStandard = Double.valueOf(request
 					.getParameter("weightStandard"));
+			double weight=weightStandard;
 			System.out.println(start_time + " " + end_time + " " + stream
 					+ " " + weightStandard);
 
 			// HQL语句
-			String hql = "";
+			// HQL语句
+			String hql = "from Car where 1=2";
+			String hql2= "from Car2 where 1=2";
 			if (stream.equals("全部")) {
 				if (!start_time.equals("") && !end_time.equals("")) {
 					// 查询在start_time和end_time之间，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.datetime <= str_to_date('"
+							+ "' and c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
+					hql2 = "from Car2 c2 where c2.datetime >= '"
+							+ start_time
+							+ "' and c2.datetime <= '"
+							+ end_time
+							+ "' and c2.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
+					hql2 = "from Car2 c2 where c2.datetime >= '"
+							+ start_time
+							+ "' and c2.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime <= str_to_date('"
+					hql = "from Car c where c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
+					hql2 = "from Car2 c2 where c2.datetime <= '"
+							+ end_time
+							+ "' and c.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
-					hql = "from Car c where c.weight >= " + 0
-							+ " order by c.datetime asc";
+					hql = "from Car c where c.weight >= " + weight
+							+ " and c.flag='0' order by c.datetime asc";
+					hql2 = "from Car2 c2 where c2.weight >= " + weight
+							+ " and c2.flag='0' order by c2.datetime asc";
 				}
-			} else {
+
+			} else if(stream.equals("上游")){
 				if (!start_time.equals("") && !end_time.equals("")) {
 					// 查询在start_time和end_time之间，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.datetime <= str_to_date('"
+							+ "' and c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime >= str_to_date('"
+					hql = "from Car c where c.datetime >= '"
 							+ start_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
-					hql = "from Car c where c.datetime <= str_to_date('"
+					hql = "from Car c where c.datetime <= '"
 							+ end_time
-							+ "','%Y-%m-%d %H:%i:%s') and c.weight >= " + 0
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+							+ "' and c.weight >= "
+							+ weight + " and c.flag='0' order by c.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
-					hql = "from Car c where c.weight >= " + 0
-							+ " and c.stream = '" + stream
-							+ "' order by c.datetime asc";
+					hql = "from Car c where c.weight >= " + weight
+							+ " and c.flag='0' order by c.datetime asc";
 				}
+
 			}
+			else {
+				if (!start_time.equals("") && !end_time.equals("")) {
+					// 查询在start_time和end_time之间，并且重量大于weight的数据
+					hql2 = "from Car2 c2 where c2.datetime >= '"
+							+ start_time
+							+ "' and c2.datetime <= '"
+							+ end_time
+							+ "' and c2.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
+				} else if (!start_time.equals("") && end_time.equals("")) {
+					// 查询时间大于等于start_time，并且重量大于weight的数据
+					hql2 = "from Car2 c2 where c2.datetime >= '"
+							+ start_time
+							+ "' and c2.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
+				} else if (start_time.equals("") && !end_time.equals("")) {
+					// 查询时间小于等于end_time，并且重量大于weight的数据
+					hql2 = "from Car c2 where c2.datetime <= '"
+							+ end_time
+							+ "' and c2.weight >= "
+							+ weight + " and c2.flag='0' order by c2.datetime asc";
+				} else {
+					// 默认的HQL语句（查询重量大于weight的数据）
+					hql2 = "from Car2 c2 where c2.weight >= " + weight
+							+ " and c2.flag='0' order by c2.datetime asc";
+				}
 
-			// 查询，使用HQL语句
+			}
 			Session session = HibernateUtil.getSessionFactory().openSession();
+			System.out.println("查询的hql语句：" + hql);
+			System.out.println("查询的hql语句：" + hql2);
 			Query query = session.createQuery(hql);
+			Query query2 = session.createQuery(hql2);
 			@SuppressWarnings("unchecked")
-			List<Car> cars = query.list();
-
+			List<Car> cars1 = query.list();
+			@SuppressWarnings("unchecked")
+			List<Car2> cars2 = query2.list();
 			// 上游的车辆
-			List<Car> cars1 = new ArrayList<Car>();
+			/*List<Car> cars1 = new ArrayList<Car>();
 			// 下游的车辆
 			List<Car> cars2 = new ArrayList<Car>();
 			for (Car car : cars) {
@@ -127,7 +175,7 @@ public class GetResultJSON extends HttpServlet {
 				} else if (car.getStream().equals("下游")) {
 					cars2.add(car);
 				}
-			}
+			}*/
 			// 记录超重的车数，count1是上游，count2是下游
 			int count1 = 0;
 			int count2 = 0;
@@ -160,7 +208,7 @@ public class GetResultJSON extends HttpServlet {
 					over75Count1++;
 				}
 			}
-			for (Car car : cars2) {
+			for (Car2 car : cars2) {
 				if (car.getWeight() >= weightStandard) {
 					count2++;
 				}

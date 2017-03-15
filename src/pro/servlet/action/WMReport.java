@@ -193,8 +193,8 @@ public class WMReport extends HttpServlet {
 			Map<String, Object> map = new HashMap<String, Object>();
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-			Timestamp stime = Timestamp.valueOf(start_time);
-			Timestamp etime = Timestamp.valueOf(end_time);
+			Timestamp stime = Timestamp.valueOf(start_time+":00");
+			Timestamp etime = Timestamp.valueOf(end_time+":59");
 
 			List<Integer> columnCount = new ArrayList<Integer>();
 			for (int i = 0; i < 24; i++) {
