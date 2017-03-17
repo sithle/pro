@@ -61,7 +61,7 @@
 </head>
 
 <body onload="init()">
-	<h2><%=bridge_name%>周报表
+	<h2><%=bridge_name%>月报表
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>

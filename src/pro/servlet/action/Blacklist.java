@@ -77,39 +77,39 @@ public class Blacklist extends HttpServlet {
 							+ "' and c.datetime <= '"
 							+ end_time
 							+ "' and c.weight >= "
-							+ weight + " and c.flag='0' order by c.datetime asc";
+							+ weight + " and c.flag='0' and c.carnumber!='无' order by c.datetime asc";
 					hql2 = "from Car2 c2 where c2.datetime >= '"
 							+ start_time
 							+ "' and c2.datetime <= '"
 							+ end_time
 							+ "' and c2.weight >= "
-							+ weight + " and c2.flag='0' order by c2.datetime asc";
+							+ weight + " and c2.flag='0' and c2.carnumber!='无' order by c2.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
 					hql = "from Car c where c.datetime >= '"
 							+ start_time
 							+ "' and c.weight >= "
-							+ weight + " order by c.datetime asc";
+							+ weight + " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 					hql2 = "from Car2 c2 where c2.datetime >= '"
 							+ start_time
 							+ "' and c2.weight >= "
-							+ weight + " order by c2.datetime asc";
+							+ weight + " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
 					hql = "from Car c where c.datetime <= '"
 							+ end_time
 							+ "' and c.weight >= "
-							+ weight + " order by c.datetime asc";
+							+ weight + " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 					hql2 = "from Car2 c2 where c2.datetime <= '"
 							+ end_time
 							+ " and c.weight >= "
-							+ weight + "' order by c2.datetime asc";
+							+ weight + " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
 					hql = "from Car c where c.weight >= " + weight
-							+ " order by c.datetime asc";
+							+ " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 					hql2 = "from Car2 c2 where c2.weight >= " + weight
-							+ " order by c2.datetime asc";
+							+ " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				}
 
 			} else if(stream.equals("上游")){
@@ -120,23 +120,23 @@ public class Blacklist extends HttpServlet {
 							+ "' and c.datetime <= '"
 							+ end_time
 							+ "' and c.weight >= "
-							+ weight + " and c.flag='0' order by c.datetime asc";
+							+ weight + " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
 					hql = "from Car c where c.datetime >= '"
 							+ start_time
 							+ "' and c.weight >= "
-							+ weight + " order by c.datetime asc";
+							+ weight + " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
 					hql = "from Car c where c.datetime <= '"
 							+ end_time
 							+ "' and c.weight >= "
-							+ weight + " order by c.datetime asc";
+							+ weight + " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
 					hql = "from Car c where c.weight >= " + weight
-							+ " order by c.datetime asc";
+							+ " and c.carnumber!='无' and c.flag='0' order by c.datetime asc";
 				}
 
 			}
@@ -148,23 +148,23 @@ public class Blacklist extends HttpServlet {
 							+ "' and c2.datetime <= '"
 							+ end_time
 							+ "' and c2.weight >= "
-							+ weight + "and c2.flag='0' order by c2.datetime asc";
+							+ weight + "and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				} else if (!start_time.equals("") && end_time.equals("")) {
 					// 查询时间大于等于start_time，并且重量大于weight的数据
 					hql2 = "from Car2 c2 where c2.datetime >= '"
 							+ start_time
 							+ "' and c2.weight >= "
-							+ weight + " order by c2.datetime asc";
+							+ weight + " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				} else if (start_time.equals("") && !end_time.equals("")) {
 					// 查询时间小于等于end_time，并且重量大于weight的数据
 					hql2 = "from Car c2 where c2.datetime <= '"
 							+ end_time
 							+ "' and c2.weight >= "
-							+ weight + " order by c2.datetime asc";
+							+ weight + " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				} else {
 					// 默认的HQL语句（查询重量大于weight的数据）
 					hql2 = "from Car2 c2 where c2.weight >= " + weight
-							+ " order by c2.datetime asc";
+							+ " and c2.carnumber!='无' and c2.flag='0' order by c2.datetime asc";
 				}
 
 			}

@@ -229,7 +229,7 @@ public class WeekReport extends HttpServlet {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
 				WeekExcel
-						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(7));
+						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(6));
 				
 				out.println("<!DOCTYPE HTML>");
 				out.println("<HTML>");

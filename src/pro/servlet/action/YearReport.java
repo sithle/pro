@@ -26,7 +26,7 @@ import com.sun.mail.handlers.image_gif;
 
 import pro.hibernate.util.HibernateUtil;
 import pro.json.tools.JsonTools;
-import pro.utils.CreateExcel;
+import pro.utils.YearExcel;
 
 public class YearReport extends HttpServlet {
 
@@ -88,16 +88,16 @@ public class YearReport extends HttpServlet {
 		String startTimeString = request.getParameter("start_time");
 		String endTimeString = request.getParameter("end_time");
 		String yearTimeString = request.getParameter("year_text");
-		String yearString = "2017";
+//		String yearString = "2017";
 		String stream= request.getParameter("stream");
 		String weightStandardString = request.getParameter("weightStandard");
 		System.out.println("开始时间:"+startTimeString+"结束时间："+endTimeString+"年份："+yearTimeString+"上下游："+stream);
 		
 		String resultJSONString = "";
 
-		if (yearString != null
+		if (yearTimeString != null
 				&& weightStandardString != null) {
-			System.out.println("输入年及超重标准:" + yearString + ";"
+			System.out.println("输入年及超重标准:" + yearTimeString + ";"
 					+ weightStandardString);
 
 			Double weightStandard = Double.valueOf(weightStandardString);
@@ -112,7 +112,7 @@ public class YearReport extends HttpServlet {
 			Calendar cal_end = Calendar.getInstance();
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-			int yearINT = Integer.valueOf(yearString);
+			int yearINT = Integer.valueOf(yearTimeString);
 			
 
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -173,7 +173,7 @@ public class YearReport extends HttpServlet {
 				
 				Map<String, Object> map_ = new HashMap<String, Object>();
 				map_.put("place", "天兴洲大桥上游");
-				map_.put("time", yearString + "年"+ (i+1) + "月" );
+				map_.put("time", yearTimeString + "年"+ (i+1) + "月" );
 				map_.put("overnumber", count);
 				map_.put("over55number", count1);
 				map_.put("over75number", count2);
@@ -270,7 +270,7 @@ public class YearReport extends HttpServlet {
 				
 				Map<String, Object> map03 = new HashMap<String, Object>();
 				map03.put("place", "天兴洲大桥下游");
-				map03.put("time", yearString + "年"+ (i+1) + "月" );
+				map03.put("time", yearTimeString + "年"+ (i+1) + "月" );
 				map03.put("overnumber", count);
 				map03.put("over55number", count1);
 				map03.put("over75number", count2);
@@ -333,7 +333,8 @@ public class YearReport extends HttpServlet {
 			if (request.getParameter("isGetExcel").equals("1")) {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
-				CreateExcel.getDayExcel(sheetname, excelname + ".xls", map);
+				YearExcel.getExcel(sheetname, excelname+".xls", list, yearTimeString);
+//				CreateExcel.getDayExcel(sheetname, excelname + ".xls", map);
 			}
 		}
 //		this.StringOutPut("error", response);

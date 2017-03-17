@@ -31,7 +31,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>周月汇总</title>
+<title>高峰时段统计</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -61,7 +61,7 @@
 </head>
 
 <body onload="init()">
-	<h2><%=bridge_name%>周月汇总
+	<h2><%=bridge_name%>高峰时段统计
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
@@ -69,7 +69,7 @@
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:1050px;height:435px"
-		url="<%=WMReportServlet %>" title="周月汇总" iconCls="icon-search" toolbar="#tb"
+		url="<%=WMReportServlet %>" title="高峰时段统计" iconCls="icon-search" toolbar="#tb"
 		rownumbers="false" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
 		<thead>
 			<tr>

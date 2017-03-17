@@ -175,9 +175,9 @@ public class CreateExcel {
 			cell1 = row1_.createCell(7);
 			cell1.setCellValue("上/下游");
 			cell1.setCellStyle(style3_);
-			for (int i = 1; i < list.size(); i++) {
+			for (int i = 0; i < list.size(); i++) {
 				//System.out.println("test：" + i);
-				row = sheet.createRow((int) i + 1);
+				row = sheet.createRow((int) i + 2);
 				row.setHeightInPoints(22);
 				Car car = (Car) list.get(i);
 				// 第四步，创建单元格，并设置值
@@ -207,7 +207,7 @@ public class CreateExcel {
 				cell7_.setCellStyle(style6_);
 			}
 			
-			row = sheet.createRow((int) list.size() + 1);
+			row = sheet.createRow((int) list.size() + 2);
 			row.setHeightInPoints(22);
 			HSSFCell cell0_=row.createCell(0);
 			cell0_.setCellStyle(style1_);
@@ -376,12 +376,13 @@ public class CreateExcel {
 			Map<String, Object> map_ = list.get(i);
 			// 第四步，创建单元格，并设置值
 			row.createCell((short) 0).setCellValue((String) map_.get("time"));
-			for (int j = 1; j <= map_.size() - 2; j++) {
+			for (int j = 1; j <= map_.size() - 3; j++) {
 				row.createCell((short) j).setCellValue(
 						(Integer) map_.get("hour" + j));
 			}
 			row.createCell((short) 25).setCellValue(
 					(Integer) map_.get("number"));
+			row.createCell((short)25).setCellValue((String)map_.get("fastigium"));
 		}
 
 		// 第六步，将文件存到指定位置

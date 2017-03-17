@@ -51,7 +51,7 @@ public class MonthReport extends HttpServlet {
 					.getParameter("weightStandard"));
 			String dateString = request.getParameter("start_time");
 			List<String> datelist = new ArrayList<String>();
-			datelist.add(dateString);
+			//datelist.add(dateString);
 			String dateString_=new String();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Map<String, Object> map_1 = new HashMap<String, Object>();
@@ -85,7 +85,7 @@ public class MonthReport extends HttpServlet {
 			int maxDate = cal.get(Calendar.DATE); 
 			cal.set(Calendar.DATE, 1);
 			dateString_=sdf.format(cal.getTime());
-			//datelist.add(dateString_);
+			datelist.add(dateString_);
 			for(int i=0;i<maxDate;i++)
 				{
 				cal.add(Calendar.DATE, 1);
@@ -234,7 +234,7 @@ public class MonthReport extends HttpServlet {
 				String sheetname = request.getParameter("sheetname");
 				String excelname = request.getParameter("excelname");
 				WeekExcel
-						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(maxDate));
+						.getExcel(sheetname, excelname + ".xls",list,dateString,datelist.get(maxDate-1));
 				
 				out.println("<!DOCTYPE HTML>");
 				out.println("<HTML>");

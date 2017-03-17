@@ -83,9 +83,14 @@
 				"url" : "base/jsp/resultReport.jsp"
 			}, {
 				"menuid" : "43",
-				"menuname" : "周月汇总",
+				"menuname" : "高峰时段统计",
 				"icon" : "icon-nav",
 				"url" : "base/jsp/wmReport.jsp"
+			}, {
+				"menuid" : "61",
+				"menuname" : "危险数据统计",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/dangerousDataReport.jsp"
 			}, {
 				"menuid" : "44",
 				"menuname" : "按天汇总",
@@ -111,6 +116,11 @@
 				"menuname" : "月报表",
 				"icon" : "icon-nav",
 				"url" : "base/jsp/MonthReport.jsp"
+			},{
+				"menuid" : "60",
+				"menuname" : "年报表",
+				"icon" : "icon-nav",
+				"url" : "base/jsp/yearReport.jsp"
 			},{
 				"menuid" : "45",
 				"menuname" : "Excel下载",

@@ -14,7 +14,7 @@
 		<!-- 数据库密码 -->
 		<property name="hibernate.connection.password">123456</property>
 		<!-- JDBC url -->
-		<property name="hibernate.connection.url"> jdbc:sqlserver://127.0.0.1:1433;database=pro</property>
+		<property name="hibernate.connection.url"> jdbc:sqlserver://127.0.0.1:1433;database=weight</property>
 
 		<!-- 采用的字符集的编码是UTF-8 -->
 	<!-- 	<property name="hibernate.connection.useUnicode">true</property> -->

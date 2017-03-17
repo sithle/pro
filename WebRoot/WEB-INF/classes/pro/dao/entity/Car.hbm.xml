@@ -4,7 +4,7 @@
 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 	
 <hibernate-mapping>
-    <class name="pro.dao.entity.Car" table="carinfo">
+    <class name="pro.dao.entity.Car" table="tianxingzhou_qingshan">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="increment"></generator>

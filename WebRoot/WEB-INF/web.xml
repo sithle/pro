@@ -138,11 +138,11 @@
     <url-pattern>/servlet/WeekReport</url-pattern>
   </servlet-mapping>
   		<servlet-mapping>
-      <servlet-name>WeekReport</servlet-name>
+      <servlet-name>GetDangerousCars</servlet-name>
     <url-pattern>/servlet/GetDangerousCars</url-pattern>
   </servlet-mapping>
    		<servlet-mapping>
-      <servlet-name>WeekReport</servlet-name>
+      <servlet-name>YearReport</servlet-name>
     <url-pattern>/servlet/YearReport</url-pattern>
   </servlet-mapping>
      		<servlet-mapping>

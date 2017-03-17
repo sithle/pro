@@ -5,7 +5,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String dayReportServlet = basePath + "servlet/YearReport";
+	String yearReportServlet = basePath + "servlet/YearReport";
 
 	request.setCharacterEncoding("utf-8");
 	response.setCharacterEncoding("utf-8");
@@ -45,7 +45,7 @@
 <script type="text/javascript" src="../jquery-easyui-1.3.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/datagrid-detailview.js"></script>
 <script type="text/javascript" src="../jquery-easyui-1.3.2/locale/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../js/dayReport.js"></script>
+<script type="text/javascript" src="../js/yearReport.js"></script>
 
 <style type="text/css">
 	.dv-table td{
@@ -65,11 +65,11 @@
 	</h2>
 	<div class="demo-info" style="margin-bottom:10px">
 		<div class="demo-tip icon-tip">&nbsp;</div>
-		<div>温馨提示：所查数据量较大，</div>
+		<div>温馨提示：所查数据量较大，请耐心等待。</div>
 	</div>
 
 	<table id="dg" class="easyui-datagrid" style="width:950px;height:435px"
-		url="<%=dayReportServlet %>" title="按年汇总" iconCls="icon-search" toolbar="#tb"
+		url="<%=yearReportServlet %>" title="按年汇总" iconCls="icon-search" toolbar="#tb"
 		method="POST"
 		rownumbers="false" pagination="false" singleSelect="true" fitColumns="false" showFooter="false" >
 		<thead>
@@ -86,12 +86,12 @@
 		</thead>
 	</table>
 	<div id="tb" style="padding:3px">
-		起始时间： <input id="start_timeInput" class="easyui-datetimebox" style="width:160px"/>
+		<!-- 起始时间： <input id="start_timeInput" class="easyui-datetimebox" style="width:160px"/>
 		结束时间：<input id="end_timeInput" class="easyui-datetimebox" style="width:160px"/>
 		上/下游：<input id="streamInput" class="easyui-combobox" style="width:50px"
 					url="data/combobox_data.json"
-					valueField="id" textField="text"/>
-		选择年份:<input id="yearInput" class="easyui-combobox" style="width:50px"
+					valueField="id" textField="text"/> -->
+		选择年份:<input id="yearInput" class="easyui-combobox" style="width:80px"
 					url="data/yearselect.json"
 					valueField="id" textField="text"/>
 		超重标准(吨)：<input id="weightStandard" type="text" class="easyui-text" style="width: 30px" value="<%=weight_standard %>" />

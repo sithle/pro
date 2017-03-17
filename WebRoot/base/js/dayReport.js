@@ -49,7 +49,7 @@ function getExcelDialog() {
 	var end_time = $('#end_timeInput').datetimebox('getValue');*/
 	var starttime = $('#start_timeInput').datebox('getValue');
 	var endtime = $('#end_timeInput').datebox('getValue');
-	if (start_time != "" && end_time != "") {
+	if (starttime != "" && endtime != "") {
 		$('#dlg').dialog('open').dialog('setTitle', 'Excel表基本信息');
 		document.getElementById("tb").style.display = "none";
 	} else {

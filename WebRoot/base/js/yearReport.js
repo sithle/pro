@@ -7,14 +7,14 @@ function init() {
 function query() {
 	/*var starttime = $('#start_timeInput').datetimebox('getValue');
 	var endtime = $('#end_timeInput').datetimebox('getValue');*/
-	var starttime = $('#start_timeInput').datetimebox('getValue');
-	var endtime = $('#end_timeInput').datetimebox('getValue');
+	/*var starttime = $('#start_timeInput').datetimebox('getValue');
+	var endtime = $('#end_timeInput').datetimebox('getValue');*/
 	
-	console.log(starttime);
-	if (starttime != "" && endtime!="") {
-		var stream = $('#streamInput').combobox('getText');
+//	console.log(starttime);
+//	if (starttime != "" && endtime!="") {
+//		var stream = $('#streamInput').combobox('getText');
 		var year_time = $('#yearInput').combobox('getText');
-		alert(stream+year_time);
+//		alert(year_time);
 		document.getElementById('weightStandard').disabled = false;
 		var weightStandard = $('#weightStandard').val();
 		document.getElementById('weightStandard').disabled = true;
@@ -24,46 +24,46 @@ function query() {
 			end_time : $('#end_timeInput').datetimebox('getValue'),*/
 //			method:"post",
 			
-			start_time : starttime,
-			end_time : endtime,
+			/*start_time : starttime,
+			end_time : endtime,*/
 			year_text : year_time,
-			stream : stream,
+//			stream : stream,
 			isGetExcel : 0,
 			weightStandard : weightStandard
 		});
-	} else {
+	/*} else {
 		alert("起始时间不能为空！");
-	}
+	}*/
 }
 
 // 弹出Excel表的基本信息设置对话框
 function getExcelDialog() {
 	/*var start_time = $('#start_timeInput').datetimebox('getValue');
 	var end_time = $('#end_timeInput').datetimebox('getValue');*/
-	var starttime = $('#start_timeInput').datebox('getValue');
-	var endtime = $('#end_timeInput').datebox('getValue');
-	if (start_time != "" && end_time != "") {
+	/*var starttime = $('#start_timeInput').datebox('getValue');
+	var endtime = $('#end_timeInput').datebox('getValue');*/
+//	if (start_time != "" && end_time != "") {
 		$('#dlg').dialog('open').dialog('setTitle', 'Excel表基本信息');
 		document.getElementById("tb").style.display = "none";
-	} else {
-		alert("起始时间和终止时间不能为空！");
-	}
+//	} else {
+//		alert("起始时间和终止时间不能为空！");
+//	}
 
 }
 
 // 导出Excel表函数
 function excelAction() {
-	var stream = $('#streamInput').combobox('getText');
+//	var stream = $('#streamInput').combobox('getText');
 	var year = $('#yearInput').combobox('getText');
 	document.getElementById('weightStandard').disabled = false;
 	var weightStandard = $('#weightStandard').val();
 	document.getElementById('weightStandard').disabled = true;
 	$('#dg').datagrid('load', {
-		start_time : $('#start_timeInput').datetimebox('getValue'),
-		end_time : $('#end_timeInput').datetimebox('getValue'),
+//		start_time : $('#start_timeInput').datetimebox('getValue'),
+//		end_time : $('#end_timeInput').datetimebox('getValue'),
 		/*start_time : $('#start_timeInput').datebox('getValue'),
 		end_time : $('#end_timeInput').datebox('getValue'),*/
-		stream : stream,
+//		stream : stream,
 		year_text : year,
 		isGetExcel : 1,
 		weightStandard : weightStandard,
